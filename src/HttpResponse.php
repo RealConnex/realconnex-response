@@ -6,15 +6,15 @@ namespace Realconnex;
 
 class HttpResponse
 {
-    private $name;
+    private $response;
 
-    public function __construct(string $name)
+    public function __construct(string $request)
     {
-        $this->name = $name;
+        $this->response = $request;
     }
 
     public function hello() : string
     {
-        return 'Hello: ' . $this->name . '!';
+        return 'Response: ' . $this->response . '!';
     }
 }
