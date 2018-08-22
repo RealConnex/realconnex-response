@@ -1,14 +1,6 @@
 {
-    "name": "realconnex/response",
-    "description": "Realconnex response library",
-    "type": "library",
-    "require": {
-        "php": ">=7.0.0",
-        "symfony/http-foundation": "latest"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "6"
-    },
+    "name": "realconnex/http-response",
+    "description": "Realconnex response library.",
     "license": "MIT",
     "authors": [
         {
@@ -16,10 +8,16 @@
             "email": "jr.lebedeff@mail.ru"
         }
     ],
+    "require-dev": {
+        "phpunit/phpunit": "6"
+    },
     "autoload": {
-        "psr-0": {
-            "HelloWorld": "src/"
+        "psr-4": {
+            "Realconnex\\": "src"
         }
     },
-    "minimum-stability": "stable"
+    "require": {
+        "php": ">=7.0.0",
+        "symfony/http-foundation": "<4.0"
+    }
 }
