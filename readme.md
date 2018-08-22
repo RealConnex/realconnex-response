@@ -1,19 +1,18 @@
-# Hello World Package for PHP Composer #
+# Realconnex HTTP Response package #
 
-This is a hello world package for php composer beginners tutorial.
+This is library for standard http responses
 
 ## Usage ##
 
 ```bash
-$ composer require rivsen/hello-world dev-master
-$ touch test.php
+$ composer require realconnex/http-response
 ```
 
 ```php
 <?php
 require_once "vendor/autoload.php";
 
-$hello = new Rivsen\Demo\Hello();
+$hello = new Realconnex\HttpResponse('test');
 echo $hello->hello();
 ```
 
