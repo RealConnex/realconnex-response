@@ -2,7 +2,7 @@
 
 This is made to standardize service http responses
 
-## Installation ##
+### Installation
 
 ```bash
 $ composer require realconnex/http-response
@@ -30,7 +30,7 @@ public function getFeeds(Request $request, HttpResponse $response) : HttpRespons
     $data = $this->repository->list($page, $limit);
 
     return $response
-        ->setData($data['feeds'])
+        ->setData($data)
         ->setPage($currentPage)
         ->setTotalPages($totalPages])
         ->setNextPage($nextPage)
@@ -39,12 +39,18 @@ public function getFeeds(Request $request, HttpResponse $response) : HttpRespons
         ->sendResponse();
 }
 ```
-
+Or operation result
+```php
+public function deleteFeed(Feeds $feed, HttpResponse $response) : HttpResponse
+{
+    return $response->setResult($this->repository->delete($feed))->sendResponse();
+}
+```
 If you don't want to send response variable through parameters you can instantiate in manually, but you should send serializer in HttpResponse constructor
 ```php
 $response = new HttpResponse(SerializerInterface $serializer);
 ```
-## List of allowed setters ##
+### List of allowed setters
 
 ```php
 setData(array $data = [])
