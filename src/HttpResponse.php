@@ -26,7 +26,6 @@ class HttpResponse extends Response
 
     private $data = [];
 
-    /** @var array */
     private $groups = ['out'];
 
     public function __construct(SerializerInterface $serializer)
@@ -55,6 +54,34 @@ class HttpResponse extends Response
         return $this;
     }
 
+    public function setOffset(int $offset) : self
+    {
+        $this->data[self::F_OFFSET] = $offset;
+
+        return $this;
+    }
+
+    public function setTotalPages(int $pages) : self
+    {
+        $this->data[self::F_TOTAL_PAGES] = $pages;
+
+        return $this;
+    }
+
+    public function setNextPage(?int $page) : self
+    {
+        $this->data[self::F_NEXT_PAGE] = $page;
+
+        return $this;
+    }
+
+    public function setPrevPage(?int $page) : self
+    {
+        $this->data[self::F_PREV_PAGE] = $page;
+
+        return $this;
+    }
+
     public function setSerializationGroups(array $groups) : self
     {
         array_merge($this->groups, $groups);
@@ -69,10 +96,19 @@ class HttpResponse extends Response
         return $this;
     }
 
+    public function setContent($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
     public function sendResponse()
     {
         $this->content = $this->format($this->data);
         parent::__construct($this->content, $this->statusCode, $this->headers);
+
+        return $this;
     }
 
     private function format($content)
