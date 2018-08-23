@@ -113,13 +113,13 @@ class HttpResponse extends Response
 
     public function sendResponse()
     {
-        $this->content = $this->format($this->data);
+        $this->content = $this->serialize($this->data);
         parent::__construct($this->content, $this->statusCode, $this->headers);
 
         return $this;
     }
 
-    private function format($content)
+    private function serialize($content)
     {
         return $this->serializer->serialize($content, 'json', [
             'groups' => $this->groups
