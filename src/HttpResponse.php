@@ -17,6 +17,7 @@ class HttpResponse extends Response
     const F_TOTAL_PAGES = 'total_pages';
     const F_NEXT_PAGE = 'next_page';
     const F_PREV_PAGE = 'prev_page';
+    const F_RESULT = 'result';
 
     public $headers = ['Content-Type' => 'application/json'];
 
@@ -78,6 +79,13 @@ class HttpResponse extends Response
     public function setPrevPage(?int $page) : self
     {
         $this->data[self::F_PREV_PAGE] = $page;
+
+        return $this;
+    }
+
+    public function setResult(bool $result) : self
+    {
+        $this->data[self::F_RESULT] = $result;
 
         return $this;
     }
