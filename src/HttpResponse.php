@@ -33,9 +33,9 @@ class HttpResponse extends Response
         return $this;
     }
 
-    public function setItems(array $data) : self
+    public function setItems(array $items) : self
     {
-        $this->data[HttpResponseFields::F_ITEMS] = $data;
+        $this->data[HttpResponseFields::F_ITEMS] = $items;
 
         return $this;
     }
