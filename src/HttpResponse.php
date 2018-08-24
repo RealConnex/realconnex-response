@@ -34,58 +34,66 @@ class HttpResponse extends Response
         $this->serializer = $serializer;
     }
 
+    /** @deprecated  */
     public function setData(array $data) : self
     {
-        $this->data[self::F_DATA] = $data;
+        $this->data[HttpResponseFields::F_ITEMS] = $data;
+
+        return $this;
+    }
+
+    public function setItems(array $data) : self
+    {
+        $this->data[HttpResponseFields::F_ITEMS] = $data;
 
         return $this;
     }
 
     public function setPage(int $page) : self
     {
-        $this->data[self::F_PAGE] = $page;
+        $this->data[HttpResponseFields::F_PAGE] = $page;
 
         return $this;
     }
 
     public function setLimit(int $limit) : self
     {
-        $this->data[self::F_LIMIT] = $limit;
+        $this->data[HttpResponseFields::F_LIMIT] = $limit;
 
         return $this;
     }
 
     public function setOffset(int $offset) : self
     {
-        $this->data[self::F_OFFSET] = $offset;
+        $this->data[HttpResponseFields::F_OFFSET] = $offset;
 
         return $this;
     }
 
     public function setTotalPages(int $pages) : self
     {
-        $this->data[self::F_TOTAL_PAGES] = $pages;
+        $this->data[HttpResponseFields::F_TOTAL_PAGES] = $pages;
 
         return $this;
     }
 
     public function setNextPage(?int $page) : self
     {
-        $this->data[self::F_NEXT_PAGE] = $page;
+        $this->data[HttpResponseFields::F_NEXT_PAGE] = $page;
 
         return $this;
     }
 
     public function setPrevPage(?int $page) : self
     {
-        $this->data[self::F_PREV_PAGE] = $page;
+        $this->data[HttpResponseFields::F_PREV_PAGE] = $page;
 
         return $this;
     }
 
     public function setResult(bool $result) : self
     {
-        $this->data[self::F_RESULT] = $result;
+        $this->data[HttpResponseFields::F_RESULT] = $result;
 
         return $this;
     }
