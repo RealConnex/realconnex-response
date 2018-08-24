@@ -30,7 +30,7 @@ public function getFeeds(Request $request, HttpResponse $response) : HttpRespons
     $data = $this->repository->list($page, $limit);
 
     return $response
-        ->setData($data)
+        ->setItems($items)
         ->setPage($currentPage)
         ->setTotalPages($totalPages])
         ->setNextPage($nextPage)
@@ -49,11 +49,15 @@ public function deleteFeed(Feeds $feed, HttpResponse $response) : HttpResponse
 If you don't want to send response variable through parameters you can instantiate in manually, but you should send serializer in HttpResponse constructor
 ```php
 $response = new HttpResponse(SerializerInterface $serializer);
+$response->setItems($items)->sendResponse();
 ```
+
+NOTE: You MUST send response at the end like ``->sendResponse();``
+
 ### List of allowed setters
 
 ```php
-setData(array $data = [])
+setItems(array $items = [])
 setLimit(int $limit)
 setPage(int $page)
 setOffset(?int $page)
