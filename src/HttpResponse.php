@@ -6,13 +6,12 @@ namespace Realconnex;
 
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HttpResponse extends Response
 {
     public $headers = ['Content-Type' => 'application/json'];
 
-    protected $statusCode = JsonResponse::HTTP_OK;
+    protected $statusCode = Response::HTTP_OK;
 
     private $serializer;
 
