@@ -18,14 +18,20 @@ class HttpResponse extends Response
 
     private $data = [];
 
-    private $groups = ['out'];
+    private $serializationGroups = ['out'];
+
+    private $serializationDepth = 2;
 
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
     }
 
-    /** @deprecated  */
+    /**
+     * @deprecated
+     *
+     * use setItems(array $items) method
+     */
     public function setData(array $data) : self
     {
         $this->data[HttpResponseFields::F_ITEMS] = $data;
@@ -91,7 +97,14 @@ class HttpResponse extends Response
 
     public function setSerializationGroups(array $groups) : self
     {
-        array_merge($this->groups, $groups);
+        array_merge($this->serializationGroups, $groups);
+
+        return $this;
+    }
+
+    public function setSerializationDepth(int $depth) : self
+    {
+        $this->serializationDepth = $depth;
 
         return $this;
     }
@@ -121,7 +134,8 @@ class HttpResponse extends Response
     private function serialize($content)
     {
         return $this->serializer->serialize($content, 'json', [
-            'groups' => $this->groups
+            'groups'         => $this->serializationGroups,
+            'objectMaxDepth' => $this->serializationDepth
         ]);
     }
 }
