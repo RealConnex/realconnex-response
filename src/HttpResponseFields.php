@@ -17,4 +17,7 @@ class HttpResponseFields
     const F_NEXT_PAGE = 'next_page';
     const F_PREV_PAGE = 'prev_page';
     const F_RESULT = 'result';
+
+    const F_CONTEXT_GROUPS = 'groups';
+    const F_CONTEXT_DEPTH = 'objectMaxDepth';
 }

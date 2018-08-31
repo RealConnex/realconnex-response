@@ -13,13 +13,14 @@ class HttpResponse extends Response
 
     protected $statusCode = Response::HTTP_OK;
 
+    /** @var SerializerInterface */
     private $serializer;
 
+    /** @var array */
     private $data = [];
 
-    private $serializationGroups = ['out'];
-
-    private $serializationDepth = 2;
+    /** @var array */
+    private $context = [];
 
     public function __construct(SerializerInterface $serializer)
     {
@@ -96,14 +97,28 @@ class HttpResponse extends Response
 
     public function setSerializationGroups(array $groups) : self
     {
-        array_merge($this->serializationGroups, $groups);
+        $this->context[HttpResponseFields::F_CONTEXT_GROUPS] = $groups;
 
         return $this;
     }
 
     public function setSerializationDepth(int $depth) : self
     {
-        $this->serializationDepth = $depth;
+        $this->context[HttpResponseFields::F_CONTEXT_DEPTH] = $depth;
+
+        return $this;
+    }
+
+    /**
+     * method cleans all previous context data and sets new
+     *
+     * @param array $context
+     *
+     * @return HttpResponse
+     */
+    public function setSerializationContext(array $context) : self
+    {
+        $this->context = $context;
 
         return $this;
     }
@@ -132,9 +147,6 @@ class HttpResponse extends Response
 
     private function serialize($content)
     {
-        return $this->serializer->serialize($content, 'json', [
-            'groups'         => $this->serializationGroups,
-            'objectMaxDepth' => $this->serializationDepth
-        ]);
+        return $this->serializer->serialize($content, 'json', $this->context);
     }
 }
