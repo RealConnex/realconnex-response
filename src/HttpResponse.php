@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HttpResponse extends Response
 {
+    /** @var array */
     public $headers = ['Content-Type' => 'application/json'];
 
     protected $statusCode = Response::HTTP_OK;
@@ -125,7 +126,7 @@ class HttpResponse extends Response
 
     public function setHeaders(array $headers) : self
     {
-        array_merge($this->headers, $headers);
+        $this->headers = array_merge(['Content-Type' => 'application/json'], $headers);
 
         return $this;
     }
