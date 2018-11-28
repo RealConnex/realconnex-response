@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Realconnex;
 
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -141,7 +142,11 @@ class HttpResponse extends Response
     public function sendResponse()
     {
         $this->content = $this->serialize($this->data);
-        parent::__construct($this->content, $this->statusCode, $this->headers);
+        $headers = is_object($this->headers) && $this->headers instanceof ResponseHeaderBag ?
+            $this->headers->all() :
+            $this->headers;
+
+        parent::__construct($this->content, $this->statusCode, $headers);
 
         return $this;
     }
